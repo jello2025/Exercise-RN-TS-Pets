@@ -1,5 +1,6 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
+import { useState } from "react";
 
 interface PetItemProps {
   pet: {
@@ -13,10 +14,12 @@ interface PetItemProps {
 }
 
 const PetItem = ({ pet }: PetItemProps) => {
+  const [PetImage, setPetImage] = useState(pet.image);
+
   return (
     <View style={styles.container}>
       <View style={styles.petInfo}>
-        <Image source={{ uri: pet.image }} style={styles.image} />
+        {/* <Image source={require(PetImage)} style={styles.image} /> */}
 
         <Text style={styles.name}>{pet.name}</Text>
 
@@ -25,7 +28,9 @@ const PetItem = ({ pet }: PetItemProps) => {
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.petButton}>
-          <Text style={styles.buttonText}>Pet</Text>
+          <Text style={styles.buttonText} onPress={() => useState(pet.image2)}>
+            Pet
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.adoptButton}>
