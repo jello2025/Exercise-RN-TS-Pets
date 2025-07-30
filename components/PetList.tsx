@@ -12,6 +12,7 @@ import PetItem from "./PetItem";
 const PetList = () => {
   const petList = pets.map((pet) => <PetItem key={pet.id} pet={pet} />);
   const [query, setQuery] = useState("");
+  const [type, setType] = useState("");
 
   return (
     <ScrollView
@@ -27,22 +28,36 @@ const PetList = () => {
 
       {/* Filter by type */}
       <ScrollView horizontal contentContainerStyle={styles.filterContainer}>
-        <TouchableOpacity style={styles.filterButton}>
+        <TouchableOpacity
+          onPress={() => setType("All")}
+          style={styles.filterButton}
+        >
           <Text>All</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.filterButton}>
+        <TouchableOpacity
+          onPress={() => setType("Cat")}
+          style={styles.filterButton}
+        >
           <Text>Cat</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.filterButton}>
+        <TouchableOpacity
+          onPress={() => setType("Dog")}
+          style={styles.filterButton}
+        >
           <Text>Dog</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.filterButton}>
+        <TouchableOpacity
+          onPress={() => setType("Rabbit")}
+          style={styles.filterButton}
+        >
           <Text>Rabbit</Text>
         </TouchableOpacity>
       </ScrollView>
 
       {/* Pet List */}
-      {petList}
+      {petList.filter((pet) => {
+        return pet.type === type;
+      })}
     </ScrollView>
   );
 };
